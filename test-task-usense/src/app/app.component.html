@@ -1,0 +1,27 @@
+<div class="container">
+  <h1 class="container__title">{{title}}</h1>
+  <div class="result__container">
+    <input type="text" class="result__input" [value]="generatedPassword" placeholder="Натисніть 'Згенерувати'" readonly>
+    <button class="result__copy-button copy-success" (click)="onCopyPassword()">
+      <span *ngIf="!copySuccess">Копіювати</span>
+      <span *ngIf="copySuccess">Скопійовано</span>
+    </button>
+  </div>
+  <div class="setting">
+    <label class="setting__label-len">Довжина пароля: {{ passwordLength }}</label>
+    <input type="range" class="setting__input-length" min="6" max="32" [(ngModel)]="passwordLength">
+  </div>
+  <div class="setting">
+    <input type="checkbox" class="setting__input-checkbox" id="numbers" [(ngModel)]="includeNumbers">
+    <label for="numbers" class="setting__label-num">Додати цифи</label>
+  </div>
+
+  <div class="setting">
+    <input type="checkbox" class="setting__input-symb" id="symbols" [(ngModel)]="includeSymbols">
+    <label for="symbols" class="setting__label-symb">Додати символи(!#$)</label>
+  </div>
+  <button class="generate-button" (click)="onGeneratePassword()" [disabled]="isLoading">
+    <span *ngIf="!isLoading" class="generate">Згенерувати</span>
+    <span *ngIf="isLoading" class="processing-generate">Генерація...</span>
+  </button>
+</div>
